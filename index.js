@@ -60,3 +60,41 @@ const colorList = [
     hex: '#c0c0c0'
   }
 ];
+console.log("hi");
+
+let lista = document.getElementsByTagName("ul").item(0);
+console.log(lista)
+
+fillList(lista);
+
+function fillList(list){
+  const textDiv2 = "Muestra";
+  for(let i = 0; i < colorList.length; i++){
+    let txtDiv1 = colorList[i].colorName;
+    let colorDiv2 = colorList[i].hex;
+
+    let div1 = document.createElement("div");
+    div1.innerText = txtDiv1;
+    let div2 = document.createElement("div");
+    div2.innerText = textDiv2;
+    div2.style.backgroundColor = colorDiv2;
+
+    let boton1 = document.createElement("button");
+    boton1.innerText = "Next Item Color";
+
+    let boton2 = document.createElement("button");
+    boton2.innerText = "Page Color";
+    let element = document.createElement("li");
+    element.append(div1);
+    element.append(div2);
+    element.append(boton1);
+    element.append(boton2);
+
+    if(i%2==1){
+      element.classList.add("color-item--odd");
+    }
+    list.append(element);
+  };
+}
+
+console.log(lista)
