@@ -1,5 +1,5 @@
 // CONTENIDO DE LA PRÁCTICA:
-// Vamos a añadir elementos en una lista (con la clase "color-list") con javascript a partir del array aportado en este documento, en la constante "colorList" (ver imagen en el proyecto "ejemplo_lista.png"). 
+// Vamos a añadir elementos en una lista (con la clase "color-list") con javascript a partir del array aportado en este documento, en la constante "colorList" (ver imagen en el proyecto "ejemplo_lista.png").
 
 // Como se puede apreciar en la imagen, cada elemento que esté en una posición par de de la lista tiene que tener la clase "color-item--odd". Esta clase debe añadirse desde javascript, NO haciendo uso del selector css nth-of-type(odd) o similares. NOTA: En este caso vamos a considerar un elemento par pensando en el primer elemento como el 1 no como el 0.
 
@@ -28,73 +28,112 @@
 
 const colorList = [
   {
-    colorName: 'white',
-    hex: '#ffffff'
+    colorName: "white",
+    hex: "#ffffff"
   },
   {
-    colorName: 'red',
-    hex: '#ff0000'
+    colorName: "red",
+    hex: "#ff0000"
   },
   {
-    colorName: 'orange',
-    hex: '#ffa500'
+    colorName: "orange",
+    hex: "#ffa500"
   },
   {
-    colorName: 'yellow',
-    hex: '#ffff00'
+    colorName: "yellow",
+    hex: "#ffff00"
   },
   {
-    colorName: 'orchid',
-    hex: '#da70d6'
+    colorName: "orchid",
+    hex: "#da70d6"
   },
   {
-    colorName: 'pink',
-    hex: '#ffc0cb'
+    colorName: "pink",
+    hex: "#ffc0cb"
   },
   {
-    colorName: 'green',
-    hex: '#008000'
+    colorName: "green",
+    hex: "#008000"
   },
   {
-    colorName: 'silver',
-    hex: '#c0c0c0'
+    colorName: "silver",
+    hex: "#c0c0c0"
   }
 ];
 console.log("hi");
 
 let lista = document.getElementsByTagName("ul").item(0);
-console.log(lista)
 
 fillList(lista);
 
-function fillList(list){
+function fillList(list) {
   const textDiv2 = "Muestra";
-  for(let i = 0; i < colorList.length; i++){
+  for (let i = 0; i < colorList.length; i++) {
     let txtDiv1 = colorList[i].colorName;
     let colorDiv2 = colorList[i].hex;
 
     let div1 = document.createElement("div");
     div1.innerText = txtDiv1;
+    div1.classList.add("color-name");
+    div1.addEventListener("click",function(){clickDiv(txtDiv1)},true)
     let div2 = document.createElement("div");
+    div2.classList.add("color-show");
     div2.innerText = textDiv2;
     div2.style.backgroundColor = colorDiv2;
 
     let boton1 = document.createElement("button");
     boton1.innerText = "Next Item Color";
-
+    boton1.classList.add("color-set");
+    boton1.addEventListener("click",function(){clickNext(colorDiv2,txtDiv1),true})
     let boton2 = document.createElement("button");
     boton2.innerText = "Page Color";
+    boton2.classList.add("color-set");
+    boton2.addEventListener("click", function(){setColor(colorDiv2)}, true);
+
     let element = document.createElement("li");
     element.append(div1);
     element.append(div2);
     element.append(boton1);
     element.append(boton2);
+    element.classList.add("color-item");
 
-    if(i%2==1){
+    if (i % 2 == 1) {
       element.classList.add("color-item--odd");
     }
     list.append(element);
-  };
+
+  }
 }
 
-console.log(lista)
+
+function clickBody(){
+  alert("BODY");
+};
+
+document.getElementsByTagName("body").item(0).addEventListener("click",clickBody, true)
+
+function clickDiv(color){
+  alert(color);
+}
+
+function clickNext(color, name){
+  let newList = lista.children;
+  for(let i = 1;i<newList.length;i++){
+    let elemento = newList.item(i);
+    if(elemento.getElementsByTagName("div").item(0).textContent == name){
+      if(i == 8){
+        elemento = newList.item(1).style.backgroundColor = color;
+      }
+      else{
+        elemento.nextSibling.style.backgroundColor = color;
+      }
+    }
+  }
+}
+
+function setColor(color){
+  let cuerpo = document.getElementsByTagName("body").item(0);
+  console.log(cuerpo);
+  cuerpo.style.backgroundColor = color;
+  console.log(color)
+}
