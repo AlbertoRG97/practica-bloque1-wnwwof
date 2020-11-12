@@ -84,11 +84,11 @@ function fillList(list) {
     let boton1 = document.createElement("button");
     boton1.innerText = "Next Item Color";
     boton1.classList.add("color-set");
-    boton1.addEventListener("click",function(){clickNext(colorDiv2,txtDiv1),true})
+    boton1.addEventListener("click",function(){clickNext(colorDiv2,txtDiv1),false})
     let boton2 = document.createElement("button");
     boton2.innerText = "Page Color";
     boton2.classList.add("color-set");
-    boton2.addEventListener("click", function(){setColor(colorDiv2)}, true);
+    boton2.addEventListener("click", function(){setColor(colorDiv2)}, false);
 
     let element = document.createElement("li");
     element.append(div1);
@@ -110,7 +110,7 @@ function clickBody(){
   alert("BODY");
 };
 
-document.getElementsByTagName("body").item(0).addEventListener("click",clickBody, true)
+document.getElementsByTagName("body").item(0).addEventListener("click",clickBody, false);
 
 function clickDiv(color){
   alert(color);
@@ -133,7 +133,5 @@ function clickNext(color, name){
 
 function setColor(color){
   let cuerpo = document.getElementsByTagName("body").item(0);
-  console.log(cuerpo);
   cuerpo.style.backgroundColor = color;
-  console.log(color)
 }
