@@ -75,7 +75,7 @@ function fillList(list) {
     let div1 = document.createElement("div");
     div1.innerText = txtDiv1;
     div1.classList.add("color-name");
-    div1.addEventListener("click",function(){clickDiv(txtDiv1)},true)
+    div1.addEventListener("click",function(){clickDiv(txtDiv1,event)},true)
     let div2 = document.createElement("div");
     div2.classList.add("color-show");
     div2.innerText = textDiv2;
@@ -84,11 +84,11 @@ function fillList(list) {
     let boton1 = document.createElement("button");
     boton1.innerText = "Next Item Color";
     boton1.classList.add("color-set");
-    boton1.addEventListener("click",function(){clickNext(colorDiv2,txtDiv1),false})
+    boton1.addEventListener("click",function(){clickNext(colorDiv2,txtDiv1,event),false})
     let boton2 = document.createElement("button");
     boton2.innerText = "Page Color";
     boton2.classList.add("color-set");
-    boton2.addEventListener("click", function(){setColor(colorDiv2)}, false);
+    boton2.addEventListener("click", function(){setColor(colorDiv2,event)}, false);
 
     let element = document.createElement("li");
     element.append(div1);
@@ -105,18 +105,19 @@ function fillList(list) {
   }
 }
 
-
 function clickBody(){
   alert("BODY");
 };
 
 document.getElementsByTagName("body").item(0).addEventListener("click",clickBody, false);
 
-function clickDiv(color){
+function clickDiv(color,event){
+  event.stopPropagation();
   alert(color);
 }
 
-function clickNext(color, name){
+function clickNext(color, name,event){
+  event.stopPropagation();
   let newList = lista.children;
   for(let i = 1;i<newList.length;i++){
     let elemento = newList.item(i);
@@ -131,7 +132,8 @@ function clickNext(color, name){
   }
 }
 
-function setColor(color){
+function setColor(color, event){
+  event.stopPropagation();
   let cuerpo = document.getElementsByTagName("body").item(0);
   cuerpo.style.backgroundColor = color;
 }
